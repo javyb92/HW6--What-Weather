@@ -1,0 +1,44 @@
+*{
+    background-color: rgb(185, 231, 185);
+    font-family: 'Arimo', sans-serif;
+}
+
+header{
+    background-color: lightgreen;
+    height: 75px;
+    border-bottom: 2px solid white;
+    font-family: 'Arimo';
+    font-weight: bold;
+    color: honeydew;
+    text-align: center;
+    font-size: 50px;
+}
+
+
+section{
+    border: 2px dotted black;
+    align-self: center;
+    height: 600px
+}
+
+.row{
+    border: 2px dotted black;
+    align-self: center;
+
+}
+
+
+[class^="col-"]{
+    border: 5px dotted blue;
+
+  }
+
+#module{
+    height: 300px;
+    border: 2px dotted red;
+}
+
+
+footer{
+    text-align: center;
+}
