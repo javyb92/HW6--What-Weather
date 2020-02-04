@@ -12,17 +12,22 @@
 </head>
 <header class="container-fluid">WHAT WEATHER?!</header>
 <body>
-<main class="container-fluid">
-    <section class="row">
-        <article class="col-md-2" id="city-searches">CITY SEARCH</article>
-        <article class="col-md-10">
+<main>
+    <section class= "container-fluid row">
+        <article class="col-lg-3" id="city-searches"><div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-default">Search</span>
+            </div>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+          </div>
+        </article>
+        <article class="col-lg-9">
             <div class="row" id="module"></div>
             <div class="row" id="module"></div>
         </article>
     </section>
 </main>
 </body>
-<footer>Made By Javier A.Barragan</footer>
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="

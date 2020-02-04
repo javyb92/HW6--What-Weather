@@ -16,27 +16,34 @@ header{
 
 
 section{
-    border: 2px dotted black;
+    /* border: 2px dotted black; */
     align-self: center;
     height: 600px
 }
 
 .row{
-    border: 2px dotted black;
+    /* border: 2px dotted black; */
     align-self: center;
-
 }
 
-
-[class^="col-"]{
+/* [class^="col-"]{
     border: 5px dotted blue;
 
-  }
+  } */
 
 #module{
     height: 300px;
-    border: 2px dotted red;
+    border: 2px solid honeydew;
+    margin: 5px;
 }
+
+#city-searches{
+    border: 2px solid honeydew;
+    padding: 5px;
+    margin-top: 5px;
+ 
+}
+
 
 
 footer{
