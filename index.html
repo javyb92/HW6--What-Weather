@@ -4,13 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>A Simple Weather App</title>
     <script src="script.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Arimo|Open+Sans|Roboto&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.12.0/js/all.js"></script>
+    <script type= "text/javascript">
+      var apiKey ="5e8c1329c961bfa711486ebbeb59f577";
+      var queryURL = "https://api.openweathermap.org/data/2.5/weather?" +
+        "q=El-Paso,Texas" +"&units=imperial&appid=" + apiKey;
+         $.ajax({
+         url: queryURL,
+         method: "GET"
+         }).then(function(response){
+         console.log(queryURL);
+         console.log(response);
+         });
+   </script>
+    
 </head>
-<header class="container-fluid">WHAT WEATHER?!</header>
+<header class="container-fluid"><i class="fas fa-feather-alt"></i>WeatherFeather</header>
 <body>
 <main>
     <section class= "container-fluid row">
@@ -22,8 +37,16 @@
           </div>
         </article>
         <article class="col-lg-9">
-            <div class="row" id="module"></div>
-            <div class="row" id="module"></div>
+            <div class="row" id="module">
+              <div class="city"></div>
+              <div class="wind"></div>
+              <div class="humidity"></div>
+              <div class="temp"></div>
+              <div class="temp"></div>
+            </div>
+            <div class="row" id="module">
+              <div class="forcast"></div>
+            </div>
         </article>
     </section>
 </main>
