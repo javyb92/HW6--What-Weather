@@ -11,23 +11,27 @@
     <link href="https://fonts.googleapis.com/css?family=Arimo|Open+Sans|Roboto&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.12.0/js/all.js"></script>
-    <script type= "text/javascript">
-      var apiKey ="5e8c1329c961bfa711486ebbeb59f577";
-      var queryURL = "https://api.openweathermap.org/data/2.5/weather?" +
-        "q=El-Paso,Texas" +"&units=imperial&appid=" + apiKey;
-         $.ajax({
-         url: queryURL,
-         method: "GET"
-         }).then(function(response){
-         console.log(queryURL);
-         console.log(response);
-         });
-   </script>
-    
 </head>
 <header class="container-fluid"><i class="fas fa-feather-alt"></i>WeatherFeather</header>
 <body>
 <main>
+<script type= "text/javascript">
+    var apiKey ="5e8c1329c961bfa711486ebbeb59f577";
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?" +
+      "q=El-Paso,Texas" +"&units=imperial&appid=" + apiKey;
+       $.ajax({
+       url: queryURL,
+       method: "GET"
+       }).then(function(response){
+       console.log(queryURL);
+       console.log(response);
+       $(".city").html("<h1>Weather in " + response.name + "- </h1>");
+       $(".temp").html("<h2>" + response.main.temp + "degrees" + "</h2>");
+       $(".cond").html("<h3>" + response.weather[0].main + "</h3>");
+       $(".humidity").html(" <h2> - " + response.main.humidity + " - </h2>");
+       $(".wind").html(" <h2>" + response.wind.speed + "mph - " + "deg"+ response.wind.deg + "</h2>");
+      });
+</script> 
     <section class= "container-fluid row">
         <article class="col-lg-3" id="city-searches"><div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -39,10 +43,10 @@
         <article class="col-lg-9">
             <div class="row" id="module">
               <div class="city"></div>
-              <div class="wind"></div>
+              <div class="temp"></div>
+              <div class="cond"></div>
               <div class="humidity"></div>
-              <div class="temp"></div>
-              <div class="temp"></div>
+              <div class="wind"></div>
             </div>
             <div class="row" id="module">
               <div class="forcast"></div>
