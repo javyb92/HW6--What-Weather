@@ -1,6 +1,6 @@
 # HW6--What-Weather
 
-  "What Weather?" is a fully function web app that can be seen on destop, tabelt and mobile using Bootstrap!
+  "Weather Feather" is a fully function web app that can be seen on destop, tablet and mobile using Bootstrap! 
   
   
   

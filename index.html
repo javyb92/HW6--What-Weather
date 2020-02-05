@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>A Simple Weather App</title>
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css?family=Arimo|Open+Sans|Roboto&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.12.0/js/all.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Weather Dashboard</title>
+  <script src="script.js"></script>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+      <link rel="stylesheet" href="style.css">
+      <link href="https://fonts.googleapis.com/css?family=Arimo|Open+Sans|Roboto&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.12.0/js/all.js"></script>
 </head>
-<header class="container-fluid"><i class="fas fa-feather-alt"></i>WeatherFeather</header>
+<header class="container-fluid"><i class="fas fa-feather-alt"></i>Weather Dashboard</header>
 <body>
 <main>
 <script type= "text/javascript">
@@ -25,11 +25,11 @@
        }).then(function(response){
        console.log(queryURL);
        console.log(response);
-       $(".city").html("<h1>Weather in " + response.name + "- </h1>");
-       $(".temp").html("<h2>" + response.main.temp + "degrees" + "</h2>");
-       $(".cond").html("<h3>" + response.weather[0].main + "</h3>");
-       $(".humidity").html(" <h2> - " + response.main.humidity + " - </h2>");
-       $(".wind").html(" <h2>" + response.wind.speed + "mph - " + "deg"+ response.wind.deg + "</h2>");
+       $("#city").html("<h1>Weather in " + response.name + "- </h1>");
+       $("#temp").html("<h2>" + response.main.temp + "degrees" + "</h2>");
+       $("#cond").html("<h3>" + response.weather[0].main + "</h3>");
+       $("#humidity").html(" <h2> - " + response.main.humidity + " - </h2>");
+       $("#wind").html(" <h2>" + response.wind.speed + "mph - " + "deg"+ response.wind.deg + "</h2>");
       });
 </script> 
     <section class= "container-fluid row">
@@ -42,14 +42,18 @@
         </article>
         <article class="col-lg-9">
             <div class="row" id="module">
-              <div class="city"></div>
-              <div class="temp"></div>
-              <div class="cond"></div>
-              <div class="humidity"></div>
-              <div class="wind"></div>
+              <div class="container" id="city"></div>
+              <div class="container" id="temp"></div>
+              <div class="container" id="cond"></div>
+              <div class="container" id="humidity"></div>
+              <div class="container" id="wind"></div>
             </div>
             <div class="row" id="module">
-              <div class="forcast"></div>
+              <div class="col-lg-2" id="forcast"></div>
+              <div class="col-lg-2" id="forcast"></div>
+              <div class="col-lg-2" id="forcast"></div>
+              <div class="col-lg-2" id="forcast"></div>
+              <div class="col-lg-2" id="forcast"></div>
             </div>
         </article>
     </section>
