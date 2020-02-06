@@ -40,10 +40,10 @@
         console.log(response.list[0].weather[0].icon);
         console.log(response);
         $("#forcastday1").html("<p>" + "Tomorrow"+"</p>"+"<p>"+ "Hi "+ response.list[0].main.temp_max + " / Lo"+ response.list[0].main.temp_min + "</p>" + "<p>"+"Humidity "+ response.list[0].main.humidity + "%"+"</p>");
-        $("#forcastday2").html("<p>" + "2"+"</p>"+ "<p>"+ "Hi "+ response.list[8].main.temp_max +  " / Lo"+ response.list[8].main.temp_min + "</p>" + "<p>"+"Humidity "+ response.list[8].main.humidity + "%"+"</p>");
-        $("#forcastday3").html("<p>" + "3"+"</p>"+ "<p>"+ "Hi "+ response.list[16].main.temp_max + " / Lo"+ response.list[16].main.temp_min + "</p>" + "<p>"+"Humidity "+ response.list[16].main.humidity + "%"+"</p>");
-        $("#forcastday4").html("<p>" + "4"+"</p>"+ "<p>"+ "Hi "+ response.list[24].main.temp_max + " / Lo"+ response.list[24].main.temp_min + "</p>" + "<p>"+"Humidity "+ response.list[24].main.humidity + "%"+"</p>");
-        $("#forcastday5").html("<p>" + "5"+"</p>"+ "<p>"+ "Hi "+ response.list[32].main.temp_max + " / Lo"+ response.list[32].main.temp_min + "</p>" + "<p>"+"Humidity "+ response.list[32].main.humidity + "%"+"</p>");
+        $("#forcastday2").html(response.list[8].dt_txt + "<p>"+ "Hi "+ response.list[8].main.temp_max +  " / Lo"+ response.list[8].main.temp_min + "</p>" + "<p>"+"Humidity "+ response.list[8].main.humidity + "%"+"</p>");
+        $("#forcastday3").html(response.list[16].dt_txt + "<p>"+ "Hi "+ response.list[16].main.temp_max + " / Lo"+ response.list[16].main.temp_min + "</p>" + "<p>"+"Humidity "+ response.list[16].main.humidity + "%"+"</p>");
+        $("#forcastday4").html(response.list[24].dt_txt + "<p>" + "Hi "+ response.list[24].main.temp_max + " / Lo"+ response.list[24].main.temp_min + "</p>" + "<p>"+"Humidity "+ response.list[24].main.humidity + "%"+"</p>");
+        $("#forcastday5").html(response.list[32].dt_txt + "<p>"+ "Hi "+ response.list[32].main.temp_max + " / Lo"+ response.list[32].main.temp_min + "</p>" + "<p>"+"Humidity "+ response.list[32].main.humidity + "%"+"</p>");
       });
 
 
