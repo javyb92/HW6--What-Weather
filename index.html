@@ -103,15 +103,29 @@
 
       function renderButtons() {
         console.log(window.localStorage.getItem("cityHistory"));
+
+        var city= $("#citySearch-input").val().trim();
+
+        for (var i = 0; i < cities.length; i++) {
+          var btn = $("<button>");
+          btn.addClass("city");
+          btn.attr("data-name", cities[i]);
+          btn.text(cities[i]);
+          $("#buttons-view").append(btn);
+
+
+
+        //from tutoring session
         // var cities = window.localStorage.getItem("cityHistory");
 
         // Array.prototype.forEach.call(cities, function(city, index) {
         //   console.log(city);
         // })
       }
+    }
     
     </script> 
-</main
+</main>
 </body>
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
