@@ -33,12 +33,12 @@ section{
 
 #module{
     height: 300px;
-    border: 2px solid honeydew;
+    border: 1px solid honeydew;
     margin: 5px;
 }
 
 #city-searches{
-    border: 2px solid honeydew;
+    /* border: 2px solid honeydew; */
     padding: 5px;
     margin-top: 5px;
  

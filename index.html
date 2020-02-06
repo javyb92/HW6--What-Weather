@@ -19,26 +19,41 @@
     var apiKey ="5e8c1329c961bfa711486ebbeb59f577";
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?" +
       "q=El-Paso,Texas" +"&units=imperial&appid=" + apiKey;
-       $.ajax({
+    var query5dayURL = "https://api.openweathermap.org/data/2.5/forecast?" + "q=Dallas,Texas"+"&units=imperial&appid=" + apiKey;
+      $.ajax({
        url: queryURL,
-       method: "GET"
        }).then(function(response){
-       console.log(queryURL);
-       console.log(response);
        $("#city").html("<h1>Weather in " + response.name + "- </h1>");
        $("#temp").html("<h2>" + response.main.temp + "degrees" + "</h2>");
        $("#cond").html("<h3>" + response.weather[0].main + "</h3>");
        $("#humidity").html(" <h2> - " + response.main.humidity + " - </h2>");
        $("#wind").html(" <h2>" + response.wind.speed + "mph - " + "deg"+ response.wind.deg + "</h2>");
       });
+
+      $.ajax({
+       url: query5dayURL,
+       method: "GET"
+
+       }).then(function(response){
+        var iconcode = response.list[0].weather[0].icon; 
+        var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+        console.log(response.list[0].weather[0].icon);
+        console.log(response);
+        $("#forcastday1").html("<p>" + "Tomorrow"+"</p>"+"<p>"+ "Hi "+ response.list[0].main.temp_max + " / Lo"+ response.list[0].main.temp_min + "</p>" + "<p>"+"Humidity "+ response.list[0].main.humidity + "%"+"</p>");
+        $("#forcastday2").html("<p>" + "2"+"</p>"+ "<p>"+ "Hi "+ response.list[8].main.temp_max +  " / Lo"+ response.list[8].main.temp_min + "</p>" + "<p>"+"Humidity "+ response.list[8].main.humidity + "%"+"</p>");
+        $("#forcastday3").html("<p>" + "3"+"</p>"+ "<p>"+ "Hi "+ response.list[16].main.temp_max + " / Lo"+ response.list[16].main.temp_min + "</p>" + "<p>"+"Humidity "+ response.list[16].main.humidity + "%"+"</p>");
+        $("#forcastday4").html("<p>" + "4"+"</p>"+ "<p>"+ "Hi "+ response.list[24].main.temp_max + " / Lo"+ response.list[24].main.temp_min + "</p>" + "<p>"+"Humidity "+ response.list[24].main.humidity + "%"+"</p>");
+        $("#forcastday5").html("<p>" + "5"+"</p>"+ "<p>"+ "Hi "+ response.list[32].main.temp_max + " / Lo"+ response.list[32].main.temp_min + "</p>" + "<p>"+"Humidity "+ response.list[32].main.humidity + "%"+"</p>");
+      });
+
+
 </script> 
     <section class= "container-fluid row">
-        <article class="col-lg-3" id="city-searches"><div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroup-sizing-default">Search</span>
-            </div>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-          </div>
+        <article class="col-lg-3" id="buttons-view">
+          <form>
+            <input id="item" type="text" placeholder="City Search" required/>
+          </form>
+          <button>Clear</button>
         </article>
         <article class="col-lg-9">
             <div class="row" id="module">
@@ -49,11 +64,11 @@
               <div class="container" id="wind"></div>
             </div>
             <div class="row" id="module">
-              <div class="col-lg-2" id="forcast"></div>
-              <div class="col-lg-2" id="forcast"></div>
-              <div class="col-lg-2" id="forcast"></div>
-              <div class="col-lg-2" id="forcast"></div>
-              <div class="col-lg-2" id="forcast"></div>
+              <div class="col-lg-2" id="forcastday1"></div>
+              <div class="col-lg-2" id="forcastday2"></div>
+              <div class="col-lg-2" id="forcastday3"></div>
+              <div class="col-lg-2" id="forcastday4"></div>
+              <div class="col-lg-2" id="forcastday5"></div>
             </div>
         </article>
     </section>

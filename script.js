@@ -1,4 +1,3 @@
-console.log("Test")
 
 
 // GIVEN a weather dashboard with form inputs
