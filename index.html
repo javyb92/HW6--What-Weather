@@ -12,7 +12,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script defer src="https://use.fontawesome.com/releases/v5.12.0/js/all.js"></script>
 </head>
-<header class="container-fluid"><i class="fas fa-feather-alt"></i>Weather Dashboard</header>
+<header class="container-fluid"><i class="fas fa-feather-alt"></i>Weather Feather</header>
 <body>
 <main>
     <section class= "container-fluid row">
@@ -34,6 +34,7 @@
               <div class="container" id="cond"></div>
               <div class="container" id="humidity"></div>
               <div class="container" id="wind"></div>
+              <div class="container" id="uv-Index"></div>
             </div>
             <div class="row" id="module">
               <div class="col-lg-2" id="forcastday1"></div>
@@ -49,9 +50,9 @@
     
       $("#searchCity").on("click", function (event) {
       var apiKey ="5e8c1329c961bfa711486ebbeb59f577";
-      var city = $("#citySearch-input").val();
-      var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + apiKey;
-      var query5dayURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=" + apiKey;
+      var cities = $("#citySearch-input").val();
+      var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cities + "&units=imperial&appid=" + apiKey;
+      var query5dayURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cities + "&units=imperial&appid=" + apiKey;
             
       event.preventDefault();
 
@@ -65,15 +66,30 @@
             $("#wind").html(" <h2>" + response.wind.speed + "mph - " + "</h2>");
         
                                                                                      })
+
       $.ajax({url: query5dayURL, method: "GET"}).then(function (response) {
         console.log(response)
             $("#forcastday1").html("<p>" + "Tomorrow"+"</p>"+"<p>"+ "Hi "+ response.list[0].main.temp_max + " / Lo"+ response.list[0].main.temp_min + "</p>" + "<p>"+"Humidity "+ response.list[0].main.humidity + "%"+"</p>");
-            $("#forcastday2").html(response.list[8].dt_txt + "<p>"+ "Hi "+ response.list[8].main.temp_max +  " / Lo"+ response.list[8].main.temp_min + "</p>" + "<p>"+"Humidity "+ response.list[8].main.humidity + "%"+"</p>");
-            $("#forcastday3").html(response.list[16].dt_txt + "<p>"+ "Hi "+ response.list[16].main.temp_max + " / Lo"+ response.list[16].main.temp_min + "</p>" + "<p>"+"Humidity "+ response.list[16].main.humidity + "%"+"</p>");
-            $("#forcastday4").html(response.list[24].dt_txt + "<p>" + "Hi "+ response.list[24].main.temp_max + " / Lo"+ response.list[24].main.temp_min + "</p>" + "<p>"+"Humidity "+ response.list[24].main.humidity + "%"+"</p>");
-            $("#forcastday5").html(response.list[32].dt_txt + "<p>"+ "Hi "+ response.list[32].main.temp_max + " / Lo"+ response.list[32].main.temp_min + "</p>" + "<p>"+"Humidity "+ response.list[32].main.humidity + "%"+"</p>");
+            $("#forcastday2").html(response.list[8].dt_txt + "<p>"+ "Hi "+ response.list[8].main.temp_max +  "</p>" + "<p>"+"Humidity "+ response.list[8].main.humidity + "%"+"</p>");
+            $("#forcastday3").html(response.list[16].dt_txt + "<p>"+ "Hi "+ response.list[16].main.temp_max + "</p>" + "<p>"+"Humidity "+ response.list[16].main.humidity + "%"+"</p>");
+            $("#forcastday4").html(response.list[24].dt_txt + "<p>" + "Hi "+ response.list[24].main.temp_max +  "</p>" + "<p>"+"Humidity "+ response.list[24].main.humidity + "%"+"</p>");
+            $("#forcastday5").html(response.list[32].dt_txt + "<p>"+ "Hi "+ response.list[32].main.temp_max +  "</p>" + "<p>"+"Humidity "+ response.list[32].main.humidity + "%"+"</p>");
                                                                                      })
-      });
+
+      function renderButtons(){
+        cities.forEach(function(){
+          var $newButton = $("<button>");
+            $newButton.text(cities)
+
+          $("#buttons-view").append($newButton);
+
+          }
+          
+          )}                                                                              
+     
+    
+    renderButtons()
+    });
     
     </script> 
 </main>
