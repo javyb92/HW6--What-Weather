@@ -47,52 +47,71 @@
     </section>
     <script type= "text/javascript">
       var apiKey ="5e8c1329c961bfa711486ebbeb59f577";
-    
+      var citiesLocal = []
+
       $("#searchCity").on("click", function (event) {
-      var apiKey ="5e8c1329c961bfa711486ebbeb59f577";
-      var cities = $("#citySearch-input").val();
-      var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cities + "&units=imperial&appid=" + apiKey;
-      var query5dayURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cities + "&units=imperial&appid=" + apiKey;
+        var apiKey ="5e8c1329c961bfa711486ebbeb59f577";
+        var cities = $("#citySearch-input").val();
+        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cities + "&units=imperial&appid=" + apiKey;
+        var query5dayURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cities + "&units=imperial&appid=" + apiKey;
             
-      event.preventDefault();
+       
+        citiesLocal.push(cities)
+        window.localStorage.setItem('cityHistory', JSON.stringify(citiesLocal));
 
-      $.ajax({url: queryURL, method: "GET"}).then(function (response) {
+        event.preventDefault();
 
-        console.log(response)
-            $("#city").html("<h1>Weather in " + response.name + "- </h1>");
-            $("#temp").html("<h2>" + response.main.temp + "degrees" + "</h2>");
-            $("#cond").html("<h3>" + response.weather[0].main + "</h3>");
-            $("#humidity").html(" <h2> - " + response.main.humidity + " - </h2>");
-            $("#wind").html(" <h2>" + response.wind.speed + "mph - " + "</h2>");
-        
-                                                                                     })
+        $.ajax({url: queryURL, method: "GET"}).then(function (response) {
 
-      $.ajax({url: query5dayURL, method: "GET"}).then(function (response) {
-        console.log(response)
-            $("#forcastday1").html("<p>" + "Tomorrow"+"</p>"+"<p>"+ "Hi "+ response.list[0].main.temp_max + " / Lo"+ response.list[0].main.temp_min + "</p>" + "<p>"+"Humidity "+ response.list[0].main.humidity + "%"+"</p>");
-            $("#forcastday2").html(response.list[8].dt_txt + "<p>"+ "Hi "+ response.list[8].main.temp_max +  "</p>" + "<p>"+"Humidity "+ response.list[8].main.humidity + "%"+"</p>");
-            $("#forcastday3").html(response.list[16].dt_txt + "<p>"+ "Hi "+ response.list[16].main.temp_max + "</p>" + "<p>"+"Humidity "+ response.list[16].main.humidity + "%"+"</p>");
-            $("#forcastday4").html(response.list[24].dt_txt + "<p>" + "Hi "+ response.list[24].main.temp_max +  "</p>" + "<p>"+"Humidity "+ response.list[24].main.humidity + "%"+"</p>");
-            $("#forcastday5").html(response.list[32].dt_txt + "<p>"+ "Hi "+ response.list[32].main.temp_max +  "</p>" + "<p>"+"Humidity "+ response.list[32].main.humidity + "%"+"</p>");
-                                                                                     })
-
-      function renderButtons(){
-        cities.forEach(function(){
-          var $newButton = $("<button>");
-            $newButton.text(cities)
-
-          $("#buttons-view").append($newButton);
-
-          }
+          //console.log(response)
+              $("#city").html("<h1>Weather in " + response.name + "- </h1>");
+              $("#temp").html("<h2>" + response.main.temp + "degrees" + "</h2>");
+              $("#cond").html("<h3>" + response.weather[0].main + "</h3>");
+              $("#humidity").html(" <h2> - " + response.main.humidity + " - </h2>");
+              $("#wind").html(" <h2>" + response.wind.speed + "mph - " + "</h2>");
           
-          )}                                                                              
+                                                                                      })
+
+        $.ajax({url: query5dayURL, method: "GET"}).then(function (response) {
+          //console.log(response)
+              $("#forcastday1").html("<p>" + "Tomorrow"+"</p>"+"<p>"+ "Hi "+ response.list[0].main.temp_max + " / Lo"+ response.list[0].main.temp_min + "</p>" + "<p>"+"Humidity "+ response.list[0].main.humidity + "%"+"</p>");
+              $("#forcastday2").html(response.list[8].dt_txt + "<p>"+ "Hi "+ response.list[8].main.temp_max +  "</p>" + "<p>"+"Humidity "+ response.list[8].main.humidity + "%"+"</p>");
+              $("#forcastday3").html(response.list[16].dt_txt + "<p>"+ "Hi "+ response.list[16].main.temp_max + "</p>" + "<p>"+"Humidity "+ response.list[16].main.humidity + "%"+"</p>");
+              $("#forcastday4").html(response.list[24].dt_txt + "<p>" + "Hi "+ response.list[24].main.temp_max +  "</p>" + "<p>"+"Humidity "+ response.list[24].main.humidity + "%"+"</p>");
+              $("#forcastday5").html(response.list[32].dt_txt + "<p>"+ "Hi "+ response.list[32].main.temp_max +  "</p>" + "<p>"+"Humidity "+ response.list[32].main.humidity + "%"+"</p>");
+                                                                                      })
+      
+                                                                                     
+      // function renderButtons(){
+
+      //  
+
+      //   cities.forEach(function(){
+      //     var $newButton = $("<button>");
+      //       $newButton.text(cities)
+
+      //     $("#buttons-view").append($newButton);
+
+      //     }
+          
+      //     )}
+                                                                              
      
     
-    renderButtons()
-    });
+        renderButtons()
+      });
+
+      function renderButtons() {
+        console.log(window.localStorage.getItem("cityHistory"));
+        // var cities = window.localStorage.getItem("cityHistory");
+
+        // Array.prototype.forEach.call(cities, function(city, index) {
+        //   console.log(city);
+        // })
+      }
     
     </script> 
-</main>
+</main
 </body>
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
