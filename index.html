@@ -5,36 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Weather Dashboard</title>
-  <script src="script.js"></script>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
       <link rel="stylesheet" href="style.css">
       <link href="https://fonts.googleapis.com/css?family=Arimo|Open+Sans|Roboto&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script defer src="https://use.fontawesome.com/releases/v5.12.0/js/all.js"></script>
 </head>
-<header class="container-fluid"><i class="fas fa-feather-alt"></i>Weather Feather</header>
+<header class="container-fluid"><i class="fas fa-feather-alt" id="logo"></i>Weather Feather</header>
 <body>
 <main>
     <section class= "container-fluid row">
-        <article class="col-lg-3">
+        <article class="col-lg-3" id="form">
           <form id= "city-form">
-            <label for="citySearch-input">Search for a city</label>
+            <label for="citySearch-input"></label>
             <input type="text" id="citySearch-input">
 
-            <input id="searchCity" type="submit" value="City Search"></input>
+            <input id="searchCity" type="submit" value="SEARCH"></input>
           </form>
           <div class="buttons-view">
-            <button>Clear</button>
+            <!-- <button>Clear</button> -->
           </div>
         </article>
-        <article class="col-lg-9">
+        <article class="col-lg-9" id="weather info">
             <div class="row" id="module">
               <div class="container" id="city"></div>
               <div class="container" id="temp"></div>
               <div class="container" id="cond"></div>
               <div class="container" id="humidity"></div>
               <div class="container" id="wind"></div>
-              <div class="container" id="uv-Index"></div>
+              <div class="container" id="uv-Index"><p id= "uvIndexValue"></div>
             </div>
             <div class="row" id="module">
               <div class="col-lg-2" id="forcastday1"></div>
@@ -45,62 +44,59 @@
             </div>
         </article>
     </section>
+    <!-- Script Below -->
     <script type= "text/javascript">
       var apiKey ="5e8c1329c961bfa711486ebbeb59f577";
       var citiesLocal = []
 
-      $("#searchCity").on("click", function (event) {
+      // Search function, click search to execute
+      $("#searchCity").on("click", function (event) { 
         var apiKey ="5e8c1329c961bfa711486ebbeb59f577";
         var cities = $("#citySearch-input").val();
         var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cities + "&units=imperial&appid=" + apiKey;
         var query5dayURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cities + "&units=imperial&appid=" + apiKey;
-            
-       
+
         citiesLocal.push(cities)
         window.localStorage.setItem('cityHistory', JSON.stringify(citiesLocal));
 
         event.preventDefault();
-
+       
+        //Top module script, displays today info
         $.ajax({url: queryURL, method: "GET"}).then(function (response) {
-
-          //console.log(response)
-              $("#city").html("<h1>Weather in " + response.name + "- </h1>");
-              $("#temp").html("<h2>" + response.main.temp + "degrees" + "</h2>");
+              $("#city").html("<h1>Weather in " + response.name + "</h1>");
+              $("#temp").html("<h2>" + Math.ceil (response.main.temp) + " degrees" + "</h2>");
               $("#cond").html("<h3>" + response.weather[0].main + "</h3>");
-              $("#humidity").html(" <h2> - " + response.main.humidity + " - </h2>");
-              $("#wind").html(" <h2>" + response.wind.speed + "mph - " + "</h2>");
-          
-                                                                                      })
+              $("#humidity").html("<h2>"+ "Humidity " + Math.ceil (response.main.humidity) + "</h2>");
+              $("#wind").html(" <h2>" + Math.ceil(response.wind.speed) + " mph" + "</h2>");
+        
+        //Long & Lat coordinates grabbed from queryURL for UV Index api 
+                var lonCoordinates = response.coord.lon;
+                var latCoordinates = response.coord.lat;
+                var uvindexURL= "http://api.openweathermap.org/data/2.5/uvi?"+ "appid=" +apiKey + "&lat="+ latCoordinates +"&lon="+ lonCoordinates;
+        
+        // UV Index api, then displays with top module
+              $.ajax({url: uvindexURL, method: "GET"}).then(function (response) {
+              $("#uvIndexValue").html(" <h2>" + "UV Index: "+ response.value + "</h2>");
+                  // console.log(response);
+              })
 
+          })
+       
+        //Bottom module script, displays 5 day forecast info
         $.ajax({url: query5dayURL, method: "GET"}).then(function (response) {
           //console.log(response)
-              $("#forcastday1").html("<p>" + "Tomorrow"+"</p>"+"<p>"+ "Hi "+ response.list[0].main.temp_max + " / Lo"+ response.list[0].main.temp_min + "</p>" + "<p>"+"Humidity "+ response.list[0].main.humidity + "%"+"</p>");
-              $("#forcastday2").html(response.list[8].dt_txt + "<p>"+ "Hi "+ response.list[8].main.temp_max +  "</p>" + "<p>"+"Humidity "+ response.list[8].main.humidity + "%"+"</p>");
-              $("#forcastday3").html(response.list[16].dt_txt + "<p>"+ "Hi "+ response.list[16].main.temp_max + "</p>" + "<p>"+"Humidity "+ response.list[16].main.humidity + "%"+"</p>");
-              $("#forcastday4").html(response.list[24].dt_txt + "<p>" + "Hi "+ response.list[24].main.temp_max +  "</p>" + "<p>"+"Humidity "+ response.list[24].main.humidity + "%"+"</p>");
-              $("#forcastday5").html(response.list[32].dt_txt + "<p>"+ "Hi "+ response.list[32].main.temp_max +  "</p>" + "<p>"+"Humidity "+ response.list[32].main.humidity + "%"+"</p>");
-                                                                                      })
-      
-                                                                                     
-      // function renderButtons(){
+              $("#forcastday1").html("<p>" + "Tomorrow"+"</p>"+"<p>"+ "Hi "  + Math.ceil(response.list[0].main.temp_max) + " / Lo"+ Math.ceil(response.list[0].main.temp_min)+ "</p>" + "<p>"+"Humidity "+ response.list[0].main.humidity + "%"+"</p>");
+              $("#forcastday2").html("<p>" + response.list[8].dt_txt + "</p>" + "<p>"+ "Hi "  + Math.ceil(response.list[8].main.temp_max)  +  "</p>" + "<p>"+"Humidity " + response.list[8].main.humidity + "%"+"</p>");
+              $("#forcastday3").html("<p>" + response.list[16].dt_txt + "</p>" + "<p>"+ "Hi " + Math.ceil(response.list[16].main.temp_max) + "</p>" + "<p>"+"Humidity "  + response.list[16].main.humidity + "%"+"</p>");
+              $("#forcastday4").html("<p>" + response.list[24].dt_txt + "</p>" + "<p>" + "Hi "+ Math.ceil(response.list[24].main.temp_max) +  "</p>" + "<p>"+"Humidity " + response.list[24].main.humidity + "%"+"</p>");
+              $("#forcastday5").html("<p>" + response.list[32].dt_txt + "</p>" + "<p>"+ "Hi " + Math.ceil(response.list[32].main.temp_max) +  "</p>" + "<p>"+"Humidity " + response.list[32].main.humidity + "%"+"</p>");
+              
+          })
 
-      //  
-
-      //   cities.forEach(function(){
-      //     var $newButton = $("<button>");
-      //       $newButton.text(cities)
-
-      //     $("#buttons-view").append($newButton);
-
-      //     }
-          
-      //     )}
-                                                                              
-     
-    
         renderButtons()
       });
 
+      // render buttons work in progress
       function renderButtons() {
         console.log(window.localStorage.getItem("cityHistory"));
 

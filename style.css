@@ -1,6 +1,7 @@
 *{
     background-color: rgb(185, 231, 185);
     font-family: 'Arimo', sans-serif;
+
 }
 
 header{
@@ -12,6 +13,30 @@ header{
     color: honeydew;
     text-align: center;
     font-size: 50px;
+}
+
+#{
+    color: honeydew
+}
+
+#searchCity{
+    color: honeydew;
+    background-color: lightgreen;
+    border: 2px solid lightgreen;
+    margin-top: 5px;
+}
+
+button{
+    color: honeydew;
+    background-color: lightgreen;
+    border: 2px solid lightgreen;
+}
+
+#citySearch-input{
+    color: black;
+    background-color: honeydew;
+    border: 2px solid lightgreen;
+    width: 250px;
 }
 
 
@@ -31,10 +56,19 @@ section{
 
   } */
 
+#weatherinfo{
+    color: black;
+}
+
 #module{
     height: 300px;
     border: 1px solid honeydew;
     margin: 5px;
+    color: black
+}
+
+#uvIndexValue > 5{
+    color: yellow;
 }
 
 #city-searches{
