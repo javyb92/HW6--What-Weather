@@ -23,10 +23,9 @@
             <input id="searchCity" type="submit" value="SEARCH"></input>
           </form>
           <div class="buttons-view">
-            <!-- <button>Clear</button> -->
           </div>
         </article>
-        <article class="col-lg-9" id="weather info">
+        <article class="col-lg-9" id="weather-info">
             <div class="row" id="module">
               <div class="container" id="city"></div>
               <div class="container" id="temp"></div>
@@ -47,20 +46,13 @@
     <!-- Script Below -->
     <script type= "text/javascript">
       var apiKey ="5e8c1329c961bfa711486ebbeb59f577";
-      var citiesLocal = []
+      var citiesLocal = JSON.parse(window.localStorage.getItem('cityHistory')) || [] 
+      renderButtons()
 
-      // Search function, click search to execute
-      $("#searchCity").on("click", function (event) { 
-        var apiKey ="5e8c1329c961bfa711486ebbeb59f577";
-        var cities = $("#citySearch-input").val();
-        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cities + "&units=imperial&appid=" + apiKey;
-        var query5dayURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cities + "&units=imperial&appid=" + apiKey;
-
-        citiesLocal.push(cities)
-        window.localStorage.setItem('cityHistory', JSON.stringify(citiesLocal));
-
-        event.preventDefault();
-       
+      function getDataUpdateHTML(city) {
+        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + apiKey;
+        var query5dayURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=" + apiKey;
+        
         //Top module script, displays today info
         $.ajax({url: queryURL, method: "GET"}).then(function (response) {
               $("#city").html("<h1>Weather in " + response.name + "</h1>");
@@ -92,8 +84,23 @@
               $("#forcastday5").html("<p>" + response.list[32].dt_txt + "</p>" + "<p>"+ "Hi " + Math.ceil(response.list[32].main.temp_max) +  "</p>" + "<p>"+"Humidity " + response.list[32].main.humidity + "%"+"</p>");
               
           })
+      }
+      // Search function, click search to execute
+      $("#searchCity").on("click", function (event) { 
+        var city = $("#citySearch-input").val();
 
+        citiesLocal.push(city)
+        window.localStorage.setItem('cityHistory', JSON.stringify(citiesLocal));
+
+        event.preventDefault();
+
+        getDataUpdateHTML(city)
         renderButtons()
+      });
+
+      $(".historybtn").on("click", function (event) { 
+        var city = $(event.target).data('city');
+        getDataUpdateHTML(city)
       });
 
       // render buttons work in progress
@@ -102,21 +109,23 @@
 
         var city= $("#citySearch-input").val().trim();
 
-        for (var i = 0; i < cities.length; i++) {
-          var btn = $("<button>");
-          btn.addClass("city");
-          btn.attr("data-name", citiesLocal[i]);
-          btn.text(citiesLocal[i]);
-          $("#buttons-view").appendTo(btn);
+        $(".buttons-view").empty();
 
+        for (var i = 0; i < citiesLocal.length; i++) { 
+
+          $(".buttons-view").append(
+            '<button data-city=' + citiesLocal[i] + ' class="historybtn">' 
+            + citiesLocal[i] + 
+            '<button>'
+          );
 
 
         //from tutoring session
-        // var cities = window.localStorage.getItem("cityHistory");
+       // var cities = window.localStorage.getItem("cityHistory");
 
-        // Array.prototype.forEach.call(cities, function(city, index) {
-        //   console.log(city);
-        // })
+        //Array.prototype.forEach.call(cities, function(city, index) {
+         // console.log(city);
+       // })
       }
     }
     
