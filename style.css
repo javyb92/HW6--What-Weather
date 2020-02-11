@@ -76,6 +76,10 @@ section{
  
 }
 
+#clearButton{
+    background-color: honeydew;
+    color: lightgreen;
+}
 
 
 footer{

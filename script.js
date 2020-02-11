@@ -3,7 +3,14 @@ $(document).ready(function() {
 
   var citiesLocal = JSON.parse(window.localStorage.getItem('cityHistory')) || [] 
   renderButtons()
-  
+
+
+  //Reloading previous search using .get(-1) to grab last result
+  $(document).ready(function renderLastCity(){
+    var cityreload= $(citiesLocal).get(-1);
+  getDataUpdateHTML(cityreload);
+  });
+
   // Using JSON/Localstorage for quries
   function getDataUpdateHTML(city) {
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + apiKey;
@@ -20,12 +27,14 @@ $(document).ready(function() {
             var lonCoordinates = response.coord.lon;
             var latCoordinates = response.coord.lat;
             var uvindexURL= "http://api.openweathermap.org/data/2.5/uvi?"+ "appid=" +apiKey + "&lat="+ latCoordinates +"&lon="+ lonCoordinates; 
-    // UV Index api, then displays with top module
+    
+            // UV Index api, then displays with top module
           $.ajax({url: uvindexURL, method: "GET"}).then(function (response) {
           $("#uvIndexValue").html(" <h2>" + "UV Index: "+ response.value + "</h2>");
               // console.log(response);
           })
       })
+
     //Bottom module script, displays 5 day forecast info
     $.ajax({url: query5dayURL, method: "GET"}).then(function (response) {
       //console.log(response)
@@ -36,30 +45,29 @@ $(document).ready(function() {
           $("#forcastday5").html("<p>" + response.list[32].dt_txt + "</p>" + "<p>"+ "Hi " + Math.ceil(response.list[32].main.temp_max) +  "</p>" + "<p>"+"Humidity " + response.list[32].main.humidity + "%"+"</p>");         
       })
   }
+
   // Search function, click search to execute
   $("#searchCity").on("click", function (event) { 
     var city = $("#citySearch-input").val();
-
     citiesLocal.push(city)
     window.localStorage.setItem('cityHistory', JSON.stringify(citiesLocal));
-
     event.preventDefault();
-
     getDataUpdateHTML(city)
     renderButtons()
 
   });
+  
   $(".buttons-view").on("click", "button", function(event) { 
     var city = $(event.target).data('city');
     getDataUpdateHTML(city)
   });
+
   // render buttons work in progress, need to get rid of duplicates and null
   function renderButtons() {
     var city= $("#citySearch-input").val().trim();
     $(".buttons-view").empty();
 
     for (var i = 0; i < citiesLocal.length; i++) { 
-      console.log(citiesLocal[i]);
       $(".buttons-view").append(
         '<button data-city=' + citiesLocal[i] + ' class="historybtn">' 
         + citiesLocal[i] + 
@@ -67,9 +75,10 @@ $(document).ready(function() {
       );
   }
 }
-//Clear Button work in progress
+//Clear Button, with page refresh ability
     $("#clearButton").on("click", function clearButton(){
-    localStorage.clear();
+    window.localStorage.clear();
+    location.reload(true);
     console.log("Button is clicked");
     });
 });
