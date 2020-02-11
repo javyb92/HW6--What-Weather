@@ -62,13 +62,13 @@ section{
     height: 400px;
     margin: 5px;
     color: black;
-
+    border-bottom: 2px solid honeydew;
 
 }
 
 #module2{
     height: 200px;
-    margin-top: 5px;
+    margin-top: 15px;
     color: black;
     justify-content: space-around; 
  
@@ -89,11 +89,23 @@ section{
     margin: 10px;
 }
 
+.historybtn:hover{
+    border: 1px solid honeydew;
+}
+
+
 #clearButton{
     background-color: honeydew;
     color: lightgreen;
 }
 
+.low{
+    color: darkgreen;
+}
+
+#uvIndexValueNumber{
+    color: hotpink;
+}
 
 footer{
     text-align: center;
