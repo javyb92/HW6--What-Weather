@@ -58,13 +58,22 @@ section{
     color: black;
 }
 
-#module{
-    height: 300px;
-    border: 1px solid honeydew;
+#module1{
+    height: 400px;
     margin: 5px;
-    color: black
+    color: black;
+
+
 }
 
+#module2{
+    height: 200px;
+    margin-top: 5px;
+    color: black;
+    justify-content: space-around; 
+ 
+
+}
 /* #uvIndexValue > 5{
     color: yellow;
 } */
@@ -74,6 +83,10 @@ section{
     padding: 5px;
     margin-top: 5px;
  
+}
+
+.historybtn{
+    margin: 10px;
 }
 
 #clearButton{

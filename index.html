@@ -26,15 +26,16 @@
           <button id="clearButton">CLEAR</button>
         </article>
         <article class="col-lg-9" id="weather-info">
-            <div class="row" id="module">
+            <div class="row" id="module1">
               <div class="container" id="city"></div>
-              <div class="container" id="temp"></div>
+              <div id="wicon"></div>
               <div class="container" id="cond"></div>
+              <div class="container" id="temp"></div>
               <div class="container" id="humidity"></div>
               <div class="container" id="wind"></div>
               <div class="container" id="uv-Index"><p id= "uvIndexValue"></div>
             </div>
-            <div class="row" id="module">
+            <div class="row" id="module2">
               <div class="col-lg-2" id="forcastday1"></div>
               <div class="col-lg-2" id="forcastday2"></div>
               <div class="col-lg-2" id="forcastday3"></div>
@@ -46,6 +47,7 @@
 </main>
 </body>
 <script src="script.js"></script>
+<script src="moment.js"></script>
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
