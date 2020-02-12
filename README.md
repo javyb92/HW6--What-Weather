@@ -1,5 +1,6 @@
 <h1>Weather Dashboard</h1>
 
+![Capture WF](https://user-images.githubusercontent.com/59591116/74335055-eb69cc80-4d60-11ea-8f97-676f8b7179a9.PNG)
 
 <h2>Description</h2>
   "Weather Feather" is a fully function web app that can be seen on destop, tablet and mobile using Bootstrap! 
