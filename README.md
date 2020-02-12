@@ -14,10 +14,11 @@
 <li>Google fonts-https://fonts.google.com/</li>
 
 <h2>Roadmap or what I could have done better</h2>
+<li>Format the time in the forcast using moment.js with no issue</li>
 <li>Button filtering, still getting empty buttons showing up on search</li>
 <li>Make it more mobile friendly</li>
-<li>Make the search function the main item seen and is toggled to the length like how it is now, with the info displayed.</li>
-<li> I would like to add some relevent features outside homework requirements for Portfolio showcase<li>
+<li>Make the search function the main item seen and is toggled to the length like how it is now, with the info displayed. This is to make it extremely user friendly</li>
+<li>I would like to add some relevent features outside homework requirements for Portfolio showcase <li>
 
 
 <h2>Project Link</h2>
