@@ -42,8 +42,6 @@ $(document).ready(function() {
               if (index > 6)
               $('#uvIndexValueNumber').css('color', 'maroon');
             }
-
-          console.log(response.value)
         })
       })
 
