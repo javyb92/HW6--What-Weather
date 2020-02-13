@@ -92,3 +92,5 @@ $(document).ready(function() {
       location.reload(true);
     });
 });
+
+// UV index somehow not working on pages, making comment to make update
