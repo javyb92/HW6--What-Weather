@@ -33,7 +33,7 @@ $(document).ready(function() {
     
     // UV Index api, then displays with top module
       $.ajax({url: uvindexURL, method: "GET"}).then(function (response) {
-          $("#uvIndexValue").html(" <h2>" + "UV Index: "+"<p id= 'uvIndexValueNumber'>"+ response.value + "</p>"+"</h2>");
+          $("#uv-Index").html("<h2>" + "UV Index: "+"<p id= 'uvIndexValueNumber'>"+ response.value +"</p>"+"</h2>");
           var index = parseInt($("#uvIndexValueNumber").text());  
           if (index < 3)
               $('#uvIndexValueNumber').css('color', 'green');
@@ -42,6 +42,8 @@ $(document).ready(function() {
               if (index > 6)
               $('#uvIndexValueNumber').css('color', 'maroon');
             }
+
+          console.log(response.value)
         })
       })
 
