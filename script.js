@@ -29,7 +29,7 @@ $(document).ready(function() {
     //Long & Lat coordinates grabbed from queryURL for UV Index api 
           var lonCoordinates = response.coord.lon;
           var latCoordinates = response.coord.lat;
-          var uvindexURL= "http://api.openweathermap.org/data/2.5/uvi?"+ "appid=" +apiKey + "&lat="+ latCoordinates +"&lon="+ lonCoordinates; 
+          var uvindexURL= "https://api.openweathermap.org/data/2.5/uvi?"+ "appid=" +apiKey + "&lat="+ latCoordinates +"&lon="+ lonCoordinates; 
     
     // UV Index api, then displays with top module
       $.ajax({url: uvindexURL, method: "GET"}).then(function (response) {
@@ -92,5 +92,3 @@ $(document).ready(function() {
       location.reload(true);
     });
 });
-
-// UV index somehow not working on pages, making comment to make update
